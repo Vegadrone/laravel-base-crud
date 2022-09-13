@@ -26,7 +26,7 @@
                                 </td>
                                 <td>{{ $comic->description}}</td>
                                 <td>{{ $comic->thumbnail }}</td>
-                                <td>{{ $comic->price}}</td>
+                                <td>{{ $comic->price}} $</td>
                                 <td>{{ $comic->series}}</td>
                                 <td>{{ $comic->sale_date}}</td>
                                 <td>{{ $comic->type}}</td>

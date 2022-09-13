@@ -15,7 +15,7 @@
                         <li class="list-group-item"><h5 class="fw-bold">Series:</h5>{{ $comic->series}}</li>
                         <li class="list-group-item"><h5 class="fw-bold">Type:</h5>{{ $comic->type}}</li>
                         <li class="list-group-item"><h5 class="fw-bold">Release Date:</h5>{{ $comic->date}}</li>
-                        <li class="list-group-item"><h5 class="fw-bold">Price:</h5>{{ $comic->price}}</li>
+                        <li class="list-group-item"><h5 class="fw-bold">Price:</h5>{{ $comic->price}} $</li>
                     </ul>
                 </div>
         </div>
