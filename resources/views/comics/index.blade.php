@@ -6,10 +6,10 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col">
-                <table class="table table-dark table-hover">
-                    <thead>
+                <table class="table table-warning table-hover">
+                    <thead class="table-danger">
                         <th>ID</th>
-                        <th colspan="10">Title</th>
+                        <th>Title</th>
                         <th>Description</th>
                         <th>Thumbnail</th>
                         <th>Price</th>
@@ -19,7 +19,7 @@
                     </thead>
                     <tbody>
                         @forelse ($comics as $comic)
-                            <tr>
+                            <tr >
                                 <td>{{ $comic->id}}</td>
                                 <td colspan="10">
                                     <a href="{{ route("comics.show", $comic) }}">{{ $comic->title }}</a>
