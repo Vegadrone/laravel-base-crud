@@ -7,13 +7,6 @@
         <div class="row justify-content-center">
             <form action="{{ route('comics.store') }}" method="POST">
                 @csrf
-                {{-- $table->string('title', 30);
-            $table->text('description');
-            $table->text('thumbnail');
-            $table->smallInteger('price');
-            $table->string('series', 50);
-            $table->date('date');
-            $table->string('type',20); --}}
                 <div class="mb-3">
                     <label for="insert-title" class="form-label">Title</label>
                     <input type="text" name="title" class="form-control" id="insert-title"
@@ -21,28 +14,37 @@
                 </div>
                 <div class="mb-3">
                     <label for="insert-thumbnail" class="form-label">Thumbnail</label>
-                    <input type="text" name="thumbnail" class="form-control" id="insert-title"
+                    <input type="text" name="thumbnail" class="form-control" id="insert-thumbnail"
                         placeholder="Inserici la cover del fumetto">
                 </div>
                 <div class="mb-3">
                     <label for="insert-series" class="form-label">Series</label>
-                    <input type="text" name="title" class="form-control" id="insert-title"
+                    <input type="text" name="series" class="form-control" id="insert-series"
                         placeholder="Inserici la serie di cui fa parte il fumetto">
                 </div>
                 <div class="mb-3">
                     <label for="insert-series" class="form-label">Date of release</label>
-                    <input type="date" name="title" class="form-control" id="insert-title">
+                    <input type="date" name="date" class="form-control" id="insert-date">
+                </div>
+                <div class="mb-3">
+                    <label for="insert-price" class="form-label">Price</label>
+                    <input type="text" name="price" class="form-control" id="insert-price" >
                 </div>
                 <div class="mb-3">
                     <label for="insert-type" class="form-label">Type</label>
-                    <select class="form-select" aria-label="Default select example">
+                     <input type="text" name="type" class="form-control" id="insert-type">
+                    {{-- <select class="form-select" aria-label="Default select example">
                         <option selected>Tipologia di fumetto</option>
-                        @foreach ($comics as $comic )
-                           <option name="type" id="type-selection">{{ $comic->type }}</option>
+                        @foreach ($comics as $comic)
+                            <option value="type" name="type">{{ $comic->type}}</option>
                         @endforeach
-                    </select>
+                    </select> --}}
                 </div>
-                <button type="submit" class="btn btn-primary">Invia</button>
+                    <div class="mt-3">
+                        <label for="description">Description</label>
+                    <textarea class="form-control" name="description" id="description" cols="30" rows="5" placeholder="Scrivi una breve descrizione delle trama del fumetto"></textarea>
+                    </div>
+                <button type="submit" class="mt-3 btn btn-lg btn-success text-center fw-bold">Invia</button>
             </form>
         </div>
     </div>
