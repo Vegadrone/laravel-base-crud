@@ -81,8 +81,8 @@ class ComicController extends Controller
     {
         $modifiedData = $request->all();
         $comic = Comic::findOrFail($id);
-        $comic->fill($modifiedData);
-        $comic->save();
+        $comic->update($modifiedData);
+
 
         return redirect()->route('comics.show', $comic->id);
     }
