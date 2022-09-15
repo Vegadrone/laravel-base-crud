@@ -5,6 +5,16 @@
 @section('main-content')
     <div class="container p-5">
         <div class="row justify-content-center">
+             @if (session('edited'))
+                <div class="alert alert-success">
+                    {{ session('edited') }} è stato modificato correttamente!
+                </div>
+            @endif
+             @if (session('created'))
+                <div class="alert alert-success">
+                    {{ session('created') }} è stato creato correttamente!
+                </div>
+            @endif
             <div class="card col-12" style="width: 18rem;">
                 <img src="{{ $comic->thumbnail }}" class="card-img-top" alt="...">
                 <div class="card-body">
@@ -32,11 +42,13 @@
                 <a href="{{ route('comics.edit', $comic->id) }}">
                     <button class="btn btn-sm btn-warning btn-lg fw-bold text-center p-3 fs-3 text-light mx-3">Edit</button>
                 </a>
-
-                <a href="">
-                    <button class="btn btn-sm btn-danger btn-lg fw-bold text-center p-3 fs-3 mx-3">Delete</button>
-                </a>
-            </button>
+                <form action="{{ route('comics.destroy', $comic->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <a href="">
+                        <button class="btn btn-sm btn-danger btn-lg fw-bold text-center p-3 fs-3 mx-3">Delete</button>
+                    </a>
+                </form>
             </div>
         </div>
     </div>

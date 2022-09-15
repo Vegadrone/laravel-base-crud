@@ -6,6 +6,11 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col">
+                @if (session('delete'))
+                    <div class="alert alert-warning">
+                        {{ session('delete') }} è stato cancellato correttamente!
+                    </div>
+                @endif
                 <table class="table table-warning table-hover">
                     <thead class="table-danger">
                         <th>ID</th>
