@@ -30,7 +30,7 @@
                                 <td>{{ $comic->thumbnail }}</td>
                                 <td>{{ $comic->price}} $</td>
                                 <td>{{ $comic->series}}</td>
-                                <td>{{ $comic->sale_date}}</td>
+                                <td>{{ $comic->date}}</td>
                                 <td>{{ $comic->type}}</td>
                                 <td><a href="{{ route('comics.edit', $comic->id) }}">
                                         <button class="btn btn-sm btn-warning">Edit</button>

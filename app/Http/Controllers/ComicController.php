@@ -40,13 +40,7 @@ class ComicController extends Controller
         $comicEntry = $request->all();
 
         $comic = new Comic();
-        $comic->title = $comicEntry['title'];
-        $comic->thumbnail = $comicEntry['thumbnail'];
-        $comic->series = $comicEntry['series'];
-        $comic->date = $comicEntry['date'];
-        $comic->price = $comicEntry['price'];
-        $comic->type = $comicEntry['type'];
-        $comic->description = $comicEntry['description'];
+        $comic->fill($comicEntry);
         $comic->save();
 
         return redirect()->route('comics.show', compact('comic'));
@@ -87,13 +81,7 @@ class ComicController extends Controller
     {
         $modifiedData = $request->all();
         $comic = Comic::findOrFail($id);
-        $comic->title = $modifiedData['title'];
-        $comic->thumbnail = $modifiedData['thumbnail'];
-        $comic->series = $modifiedData['series'];
-        $comic->date = $modifiedData['date'];
-        $comic->price = $modifiedData['price'];
-        $comic->type = $modifiedData['type'];
-        $comic->description = $modifiedData['description'];
+        $comic->fill($modifiedData);
         $comic->save();
 
         return redirect()->route('comics.show', $comic->id);
