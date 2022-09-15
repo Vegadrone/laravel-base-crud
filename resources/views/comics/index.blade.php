@@ -16,6 +16,8 @@
                         <th>Series</th>
                         <th>Sale Date</th>
                         <th>Type</th>
+                        <th></th>
+                        <th></th>
                     </thead>
                     <tbody>
                         @forelse ($comics as $comic)
@@ -30,6 +32,14 @@
                                 <td>{{ $comic->series}}</td>
                                 <td>{{ $comic->sale_date}}</td>
                                 <td>{{ $comic->type}}</td>
+                                <td><a href="{{ route('comics.edit', $comic->id) }}">
+                                        <button class="btn btn-sm btn-warning">Edit</button>
+                                    </a></td>
+                                <td>
+                                    <a href="">
+                                        <button class="btn btn-sm btn-danger">Delete</button>
+                                    </a>
+                                </td>
                             </tr>
                         @empty
                             <tr colspan=10>
