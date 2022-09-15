@@ -5,8 +5,11 @@
 @section('main-content')
     <div class="container">
         <div class="row justify-content-center">
-            <form action="{{ route('comics.store') }}" method="POST">
+            <form action="{{ route('comics.update', $comic->id) }}" method="POST">
+
                 @csrf
+                @method('PUT')
+
                 <div class="mb-3">
                     <label for="insert-title" class="form-label">Title</label>
                     <input type="text" value="{{ $comic->title }}" name="title" class="form-control" id="insert-title"
@@ -42,7 +45,9 @@
                 </div>
                     <div class="mt-3">
                         <label for="description">Description</label>
-                    <textarea class="form-control" name="description" id="description" cols="30" rows="5" placeholder="Scrivi una breve descrizione delle trama del fumetto"required>{{ $comic->description}}</textarea>
+                    <textarea class="form-control" name="description" id="description" cols="30" rows="5" placeholder="Scrivi una breve descrizione delle trama del fumetto"required>
+                        {{ $comic->description}}
+                    </textarea>
                     </div>
                 <button type="submit" class="mt-3 btn btn-lg btn-success text-center fw-bold">Inserisci le modifiche</button>
             </form>
