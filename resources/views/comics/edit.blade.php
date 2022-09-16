@@ -23,7 +23,7 @@
 
                 <div class="mb-3">
                     <label for="insert-title" class="form-label">Title</label>
-                    <input type="text" value="{{ $comic->title }}" name="title" class="form-control" id="insert-title"
+                    <input  value="{{ old('title', $comic->title) }}" type="text" value="{{ $comic->title }}" name="title" class="form-control" id="insert-title"
                         placeholder="Inserici il titolo del fumetto" required>
                 </div>
                 @error('title')
@@ -33,7 +33,7 @@
                 @enderror
                 <div class="mb-3">
                     <label for="insert-thumbnail" class="form-label">Thumbnail</label>
-                    <input type="text" value="{{ $comic->thumbnail }}" name="thumbnail" class="form-control"
+                    <input value="{{ old('thumbnail', $comic->thumbnail) }}" type="text" value="{{ $comic->thumbnail }}" name="thumbnail" class="form-control"
                         id="insert-thumbnail" placeholder="Inserici la cover del fumetto" required>
                 </div>
                 @error('thumbnail')
@@ -43,7 +43,7 @@
                 @enderror
                 <div class="mb-3">
                     <label for="insert-series" class="form-label">Series</label>
-                    <input type="text" value="{{ $comic->series }}" name="series" class="form-control"
+                    <input value="{{ old('series', $comic->series) }}" type="text" value="{{ $comic->series }}" name="series" class="form-control"
                         id="insert-series" placeholder="Inserici la serie di cui fa parte il fumetto" required>
                 </div>
                 @error('series')
@@ -53,7 +53,7 @@
                 @enderror
                 <div class="mb-3">
                     <label for="insert-series" class="form-label">Date of release</label>
-                    <input type="date" value="{{ $comic->date }}" name="date" class="form-control" id="insert-date"
+                    <input value="{{ old('date', $comic->date) }}" type="date" value="{{ $comic->date }}" name="date" class="form-control" id="insert-date"
                         required>
                 </div>
                 @error('date')
@@ -63,7 +63,7 @@
                 @enderror
                 <div class="mb-3">
                     <label for="insert-price" class="form-label">Price</label>
-                    <input type="text" value="{{ $comic->price }}" name="price" class="form-control" id="insert-price"
+                    <input type="text" value="{{ old('price', $comic->price) }}" name="price" class="form-control" id="insert-price"
                         required>
                 </div>
                 @error('price')
@@ -76,7 +76,7 @@
                     <select name="type" class="form-select" id="insert-type" aria-label="Default select example">
                         @foreach ($types as $type)
                             <option id="insert-type" value="{{ $type->type_name }}"
-                                {{ $type->type_name == $comic->type ? 'selected' : '' }}>{{ $type->type_name }}</option>
+                                {{ $type->type_name == old('type', $comic->type) ? 'selected' : '' }}>{{ $type->type_name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -89,7 +89,7 @@
                     <label for="description">Description</label>
                     <textarea class="form-control" name="description" id="description" cols="30" rows="5"
                         placeholder="Scrivi una breve descrizione delle trama del fumetto"required>
-                        {{ $comic->description }}
+                        {{ old('description', $comic->description) }}
                     </textarea>
                 </div>
                 @error('description')
