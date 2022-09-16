@@ -5,6 +5,18 @@
 @section('main-content')
     <div class="container">
         <div class="row justify-content-center">
+
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+
+            @endif
+
             <form action="{{ route('comics.store') }}" method="POST">
                 @csrf
                 <div class="mb-3">
@@ -32,13 +44,12 @@
                 </div>
                 <div class="mb-3">
                     <label for="insert-type" class="form-label">Type</label>
-                     <input type="text" name="type" class="form-control" id="insert-type" required>
-                    {{-- <select class="form-select" aria-label="Default select example">
-                        <option selected>Tipologia di fumetto</option>
-                        @foreach ($comics as $comic)
-                            <option value="type" name="type">{{ $comic->type}}</option>
+
+                    <select name="type" class="form-select" id="insert-type" aria-label="Default select example">
+                        @foreach ($types as $type)
+                            <option id="insert-type" value="{{ $type->type_name }}">{{ $type->type_name }}</option>
                         @endforeach
-                    </select> --}}
+                    </select>
                 </div>
                     <div class="mt-3">
                         <label for="description">Description</label>

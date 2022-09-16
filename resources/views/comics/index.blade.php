@@ -11,8 +11,8 @@
                         {{ session('delete') }} è stato cancellato correttamente!
                     </div>
                 @endif
-                <table class="table table-warning table-hover">
-                    <thead class="table-danger">
+                <table class="table table-secondary table-hover">
+                    <thead class="table-success">
                         <th>ID</th>
                         <th>Title</th>
                         <th>Description</th>
