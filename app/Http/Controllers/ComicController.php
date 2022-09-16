@@ -41,21 +41,36 @@ class ComicController extends Controller
     public function store(Request $request)
     {
 
+        $comicEntry = $request->all();
+        //Non capisco perché non mi da l'errore se modifico il campo type dall'inspector
         $validateComicEntry = $request->validate(
             [
                 'title' => 'required|min:3|max:255',
                 'thumbnail' => 'required|url',
                 'series' => 'required|min:3|max:255',
                 'date' => 'required|date|after:1837/01/01',
-                'price' => 'required|min:1|max:4',
-                // 'type' => 'required|min:3|max:255',
-                'description' => 'required|min:3|max:255',
+                'price' => 'required|numeric|min:1|max:4',
+                'type' => 'required|exists:comics,type',
+                'description' => 'required|min:5|max:255',
+            ],
+
+            //custom error messages
+            [
+                'title.required' => 'Inserisci un titolo',
+                'title.min'=>'Il titolo deve avere almeno 3 caratteri',
+                'thumbnail.url' => "Inserisci un link valido",
+                'thumbnail.required' => "Inserisci un link",
+                'series.required' =>"Il nome della serie deve essere inserito",
+                'series.min' => "Il nome della serie deve avere almeno 3 caratteri",
+                'date.after' => 'Inserisci una data valida',
+                'price.max' => 'Inserisci un prezzo valido, deve avere meno di 5 cifre',
+                'price.required' => 'Inserisci un prezzo',
+                'price.numeric' => 'Inserisci un prezzo in numeri',
+                'description.required' => 'La descrizione deve essere inserita',
+                'description.min' => 'La descrizione deve avere almeno 5 caratteri',
             ]
 
         );
-
-
-        $comicEntry = $request->all();
 
         $comic = new Comic();
         $comic->fill($comicEntry);
