@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comic;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ComicController extends Controller
 {
@@ -25,8 +26,10 @@ class ComicController extends Controller
      */
     public function create()
     {
-        $comics = Comic::all();
-        return view('comics.create', compact('comics'));
+
+        $types = DB::table('comics')->select('type as type_name')->distinct()->get();
+
+        return view('comics.create', compact('types'));
     }
 
     /**
@@ -37,6 +40,12 @@ class ComicController extends Controller
      */
     public function store(Request $request)
     {
+
+        $validateComicEntry = $request->all(
+            ['title'=> 'required', 'min:3', 'max:255' ]
+        );
+
+
         $comicEntry = $request->all();
 
         $comic = new Comic();
@@ -67,7 +76,10 @@ class ComicController extends Controller
     public function edit($id)
     {
         $comic = Comic::findOrFail($id);
-        return view('comics.edit', compact('comic'));
+
+        $types = DB::table('comics')->select('type as type_name')->distinct()->get();
+
+        return view('comics.edit', compact(['comic', 'types']));
     }
 
     /**
