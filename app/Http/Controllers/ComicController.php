@@ -53,10 +53,11 @@ class ComicController extends Controller
      */
     public function create()
     {
+        $comic = new Comic();
 
         $types = DB::table('comics')->select('type as type_name')->distinct()->get();
 
-        return view('comics.create', compact('types'));
+        return view('comics.create', compact('types', 'comic'));
     }
 
     /**
