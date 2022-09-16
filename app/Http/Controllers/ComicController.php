@@ -8,6 +8,33 @@ use Illuminate\Support\Facades\DB;
 
 class ComicController extends Controller
 {
+
+    protected $comicsValidationRules = [
+        'title' => 'required|min:3|max:255',
+        'thumbnail' => 'required|url',
+        'series' => 'required|min:3|max:255',
+        'date' => 'required|date|after:1837/01/01',
+        'price' => 'required|numeric|min:1|max:4',
+        'type' => 'required|exists:comics,type',
+        'description' => 'required|min:5|max:255',
+    ];
+
+    //custom error messages
+    protected $comicsValidationMsgs = [
+        'title.required' => 'Inserisci un titolo',
+        'title.min' => 'Il titolo deve avere almeno 3 caratteri',
+        'thumbnail.url' => "Inserisci un link valido",
+        'thumbnail.required' => "Inserisci un link",
+        'series.required' => "Il nome della serie deve essere inserito",
+        'series.min' => "Il nome della serie deve avere almeno 3 caratteri",
+        'date.after' => 'Inserisci una data valida',
+        'price.max' => 'Inserisci un prezzo valido, deve avere meno di 5 cifre',
+        'price.required' => 'Inserisci un prezzo',
+        'price.numeric' => 'Inserisci un prezzo in numeri',
+        'description.required' => 'La descrizione deve essere inserita',
+        'description.min' => 'La descrizione deve avere almeno 5 caratteri',
+    ];
+
     /**
      * Display a listing of the resource.
      *
@@ -43,34 +70,7 @@ class ComicController extends Controller
 
         $comicEntry = $request->all();
         //Non capisco perché non mi da l'errore se modifico il campo type dall'inspector
-        $validateComicEntry = $request->validate(
-            [
-                'title' => 'required|min:3|max:255',
-                'thumbnail' => 'required|url',
-                'series' => 'required|min:3|max:255',
-                'date' => 'required|date|after:1837/01/01',
-                'price' => 'required|numeric|min:1|max:4',
-                'type' => 'required|exists:comics,type',
-                'description' => 'required|min:5|max:255',
-            ],
-
-            //custom error messages
-            [
-                'title.required' => 'Inserisci un titolo',
-                'title.min'=>'Il titolo deve avere almeno 3 caratteri',
-                'thumbnail.url' => "Inserisci un link valido",
-                'thumbnail.required' => "Inserisci un link",
-                'series.required' =>"Il nome della serie deve essere inserito",
-                'series.min' => "Il nome della serie deve avere almeno 3 caratteri",
-                'date.after' => 'Inserisci una data valida',
-                'price.max' => 'Inserisci un prezzo valido, deve avere meno di 5 cifre',
-                'price.required' => 'Inserisci un prezzo',
-                'price.numeric' => 'Inserisci un prezzo in numeri',
-                'description.required' => 'La descrizione deve essere inserita',
-                'description.min' => 'La descrizione deve avere almeno 5 caratteri',
-            ]
-
-        );
+        $validateComicEntry = $request->validate($this->comicsValidationRules, $this->comicsValidationMsgs);
 
         $comic = new Comic();
         $comic->fill($comicEntry);
@@ -87,7 +87,7 @@ class ComicController extends Controller
      */
     public function show($id)
     {
-        $comic= Comic::findOrFail($id);
+        $comic = Comic::findOrFail($id);
         return view('comics.show', compact('comic'));
     }
 
@@ -116,6 +116,9 @@ class ComicController extends Controller
     public function update(Request $request, $id)
     {
         $modifiedData = $request->all();
+
+        $validateComicEntry = $request->validate($this->comicsValidationRules, $this->comicsValidationMsgs);
+
         $comic = Comic::findOrFail($id);
         $comic->update($modifiedData);
 
